@@ -20,9 +20,9 @@ namespace DatabaseFirstLINQ
             //ProblemThree();
             //ProblemFour();
             //ProblemFive();
-            ProblemSix();
+            //ProblemSix();
             //ProblemSeven();
-            //ProblemEight();
+            ProblemEight();
             //ProblemNine();
             //ProblemTen();
             //ProblemEleven();
@@ -87,7 +87,7 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets all of the users who registered BEFORE 2016
             // Then print each user's email and registration date to the console.
-            var users = _context.Users.Where(p => p.RegistrationDate.Value.Year < 2016);
+            var users = _context.Users.Where(u => u.RegistrationDate.Value.Year < 2016);
             foreach (var user in users)
             {
                 Console.WriteLine($"Email:{user.Email}  Reg Date:{user.RegistrationDate}");
@@ -98,7 +98,7 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets all of the users who registered AFTER 2016 and BEFORE 2018
             // Then print each user's email and registration date to the console.
-            var users = _context.Users.Where(p => p.RegistrationDate.Value.Year > 2016 && p.RegistrationDate.Value.Year < 2018);
+            var users = _context.Users.Where(u => u.RegistrationDate.Value.Year > 2016 && u.RegistrationDate.Value.Year < 2018);
             foreach (var user in users)
             {
                 Console.WriteLine($"{user.Email} | {user.RegistrationDate}");
@@ -122,7 +122,11 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
-
+            var products = _context.ShoppingCarts.Include(sc => sc.User).Include(sc => sc.Product).Where(sc => sc.User.Email == "afton@gmail.com");
+            foreach (ShoppingCart shoppingCart in products)
+            {
+                Console.WriteLine($" Name: {shoppingCart.Product.Name} \n -Price:{shoppingCart.Product.Price} \n -Quantity:{shoppingCart.Quantity}");
+            }
         }
 
         private void ProblemNine()
