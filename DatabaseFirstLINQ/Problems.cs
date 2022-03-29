@@ -33,8 +33,8 @@ namespace DatabaseFirstLINQ
             //ProblemSixteen();
             //ProblemSeventeen();
             //ProblemEighteen();
-            ProblemNineteen();
-            //ProblemTwenty();
+            //ProblemNineteen();
+            ProblemTwenty();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -272,7 +272,9 @@ namespace DatabaseFirstLINQ
         private void ProblemTwenty()
         {
             // Delete the user with the email "oda@gmail.com" from the Users table using LINQ.
-
+            var deleteUser = _context.Users.Where(u => u.Email == "oda@gmail.com").SingleOrDefault();
+            _context.Users.Remove(deleteUser);
+            _context.SaveChanges();
         }
 
         // <><><><><><><><> BONUS PROBLEMS <><><><><><><><><>
@@ -280,7 +282,7 @@ namespace DatabaseFirstLINQ
         private void BonusOne()
         {
             // Prompt the user to enter in an email and password through the console.
-            // Take the email and password and check if the there is a person that matches that combination.
+            // Take the email and password and check if there is a person that matches that combination.
             // Print "Signed In!" to the console if they exists and the values match otherwise print "Invalid Email or Password.".
         }
 
